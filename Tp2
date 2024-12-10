@@ -1,0 +1,76 @@
+#include <stdio.h> 
+#include <string.h> 
+#include <stdlib.h> 
+ 
+char *ChargerChaine(int N); 
+char *ChargerChaine(int N) { 
+    char *chaine = (char *)malloc((N + 1) * sizeof(char)); 
+  // Allouer mémoire (N+1 pour '\0') 
+    if (chaine == NULL) { 
+        printf("Erreur d'allocation mémoire\n"); 
+        exit(1); 
+    } 
+    printf("Veuillez saisir une chaine de caracteres (max %d caracteres):\n", N); 
+    scanf(" %[^\n]", chaine);  
+ // Lecture de la chaîne avec espaces 
+    return chaine; 
+} 
+int Longueur(char *ch); 
+int Longueur(char *ch) { 
+    int len = 0; 
+    while (ch[len] != '\0') { 
+        len++; 
+    } 
+    return len; 
+} 
+void InverserTab(char Tab[], char T[], int m); 
+void InverserTab(char Tab[], char T[], int m) { 
+    for (int i = 0; i < m; i++) { 
+        T[i] = Tab[m - 1 - i]; 
+   // Inversion 
+    } 
+    T[m] = '\0'; 
+  // Terminer par un '\0' 
+} 
+void ChargerTab(char *p, char Tab[]); 
+void ChargerTab(char *p, char Tab[]) { 
+    int i = 0; 
+    while (p[i] != '\0') { 
+        Tab[i] = p[i]; 
+        i++; 
+    } 
+    Tab[i] = '\0'; 
+  // Terminer par un '\0' 
+} 
+void AfficherTab(char Tab[], int m); 
+void AfficherTab(char Tab[], int m) { 
+    for (int i = 0; i < m; i++) { 
+        printf("%c", Tab[i]); 
+    } 
+    printf("\n"); 
+} 
+int main() { 
+    char *ch; 
+    int n; 
+ 
+    printf("Veuillez saisir la taille maximale de la chaine:\n"); 
+    scanf("%d", &n); 
+ 
+    ch = ChargerChaine(n); 
+    int m = Longueur(ch); 
+ 
+    char Tab[m + 1], T[m + 1]; 
+    ChargerTab(ch, Tab); 
+ 
+    printf("Contenu du tableau original:\n"); 
+    AfficherTab(Tab, m); 
+ 
+    InverserTab(Tab, T, m); 
+ 
+    printf("Contenu du tableau inverse:\n"); 
+    AfficherTab(T, m); 
+ 
+    free(ch); 
+  // Libérer la mémoire allouée 
+    return 0; 
+}
